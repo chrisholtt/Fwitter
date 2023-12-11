@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  @apply h-full
+}
+
+body {
+  @apply h-full
+}
+
+
+.my-input:focus {
+  border-image-source: linear-gradient(to right, #DB5892, #E97937);
+  border-width: 1pt;
+  border-radius: 10px;
+  border-image-slice: 1;
+  transition: all 0.5s ease-in-out;
+}
