@@ -32,6 +32,7 @@ model User {
   posts         Post[]
   comments      Comment[]
   notifications Notification[]
+  messages Messages[]
 }
 
 model Post {
@@ -67,4 +68,15 @@ model Notification {
   createdAt          DateTime @default(now())
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Messages {
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  body      String
+  from      String  @db.ObjectId
+  to        String  @db.ObjectId
+  createdAt DateTime @default(now())
+  image     String?
+
+  user User @relation(fields: [to], references: [id], onDelete: Cascade)
 }

@@ -2,14 +2,17 @@ import { useMemo } from "react";
 import { BiCalendar } from "react-icons/bi";
 import { format } from "date-fns";
 import { FaCrown } from "react-icons/fa";
-import SidebarItem from '@/components/layout/SidebarItem';
+import { LuMessagesSquare } from "react-icons/lu";
+
+import { useRouter } from 'next/router';
 
 import useCurrentUser from "@/hooks/useCurrentUser";
 import useUser from "@/hooks/useUser";
 import useFollow from "@/hooks/useFollow";
+import useMessage from "@/hooks/useMessages";
 import useEditModal from "@/hooks/useEditModal";
 import useWalletModal from "@/hooks/useWalletModal";
-
+import SidebarItem from "@/components/layout/SidebarItem"
 import Button from "../Button";
 
 interface UserBioProps {
@@ -19,11 +22,14 @@ interface UserBioProps {
 const UserBio: React.FC<UserBioProps> = ({ userId }) => {
   const { data: currentUser } = useCurrentUser();
   const { data: fetchedUser } = useUser(userId);
+  const router = useRouter();
+
 
   const editModal = useEditModal();
   const walletModal = useWalletModal();
 
   const { isFollowing, toggleFollow } = useFollow(userId);
+
 
   const createdAt = useMemo(() => {
     if (!fetchedUser?.createdAt) {
@@ -32,7 +38,6 @@ const UserBio: React.FC<UserBioProps> = ({ userId }) => {
 
     return format(new Date(fetchedUser.createdAt), 'MMMM yyyy');
   }, [fetchedUser?.createdAt])
-
 
   return (
     <div className="border-b-[1px] border-neutral-800 pb-4">
@@ -45,16 +50,16 @@ const UserBio: React.FC<UserBioProps> = ({ userId }) => {
         ) :
           (
             <>
-              <Button onClick={toggleFollow} label={isFollowing ? 'Unfollow' : 'Follow'} secondary={!isFollowing} />
               <SidebarItem
-                key={""}
+                key={"2"}
                 alert={false}
                 auth={true}
-                href={""}
-                icon={FaCrown}
-                label={"Subscribe"}
+                href={`/messages/${userId}`}
+                icon={LuMessagesSquare}
+                label={"Message"}
                 isGradient={false}
               />
+              <Button onClick={toggleFollow} label={isFollowing ? 'Subsribed' : 'Subscribe'} secondary={!isFollowing} />
             </>
           )}
       </div>
@@ -97,7 +102,7 @@ const UserBio: React.FC<UserBioProps> = ({ userId }) => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 }
 
