@@ -86,7 +86,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       const blurredImages = await Promise.all(posts.map((post: Post) => currentUser.followingIds.includes(post.userId) ? post.image : blurImage(post.image)));
 
-      posts.forEach((post: Post, index) => {
+      posts.forEach((post: Post, index: number) => {
         post.image = blurredImages[index] as string | null;
       });
 
