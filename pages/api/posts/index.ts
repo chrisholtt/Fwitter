@@ -5,6 +5,11 @@ import prisma from "@/libs/prismadb";
 
 import sharp from 'sharp'
 
+type Post = {
+  userId: string
+  image: string | null
+}
+
 const blurImage = async (base64: string | null, blurSigma = 15) => {
   try {
     let mimeType, imageData
@@ -79,9 +84,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         });
       }
 
-      const blurredImages = await Promise.all(posts.map((post: { userId: string, image: string | null }) => currentUser.followingIds.includes(post.userId) ? post.image : blurImage(post.image)));
+      const blurredImages = await Promise.all(posts.map((post: Post) => currentUser.followingIds.includes(post.userId) ? post.image : blurImage(post.image)));
 
-      posts.forEach((post, index) => {
+      posts.forEach((post: Post, index) => {
         post.image = blurredImages[index] as string | null;
       });
 
