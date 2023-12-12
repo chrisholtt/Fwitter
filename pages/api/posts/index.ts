@@ -7,9 +7,12 @@ import sharp from 'sharp'
 
 const blurImage = async (base64: string | null, blurSigma = 15) => {
   try {
-    const dataUrlParts = base64.match(/data:(.*?);base64,(.*)/);
-    const mimeType = dataUrlParts[1];
-    const imageData = Buffer.from(dataUrlParts[2], 'base64');
+    let mimeType, imageData
+    const dataUrlParts = base64?.match(/data:(.*?);base64,(.*)/);
+    if (dataUrlParts) {
+      mimeType = dataUrlParts[1];
+      imageData = Buffer.from(dataUrlParts[2], 'base64');
+    }
 
     // Blur the image using Sharp
     const blurredImageData = await sharp(imageData)
@@ -79,7 +82,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const blurredImages = await Promise.all(posts.map((post) => currentUser.followingIds.includes(post.userId) ? post.image : blurImage(post.image)));
 
       posts.forEach((post, index) => {
-        post.image = blurredImages[index];
+        post.image = blurredImages[index] as string | null;
       });
 
       return res.status(200).json(posts);
