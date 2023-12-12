@@ -38,8 +38,8 @@ const SidebarItem: React.FC<SidebarItemProps> = ({ label, icon: Icon, href, auth
   return (
     <div onClick={handleClick} className="flex flex-row items-center">
       <Tooltip title={label} placement="left">
-
-        <div className="
+        <>
+          <div className="
         relative
         rounded-full 
         h-14
@@ -53,10 +53,10 @@ const SidebarItem: React.FC<SidebarItemProps> = ({ label, icon: Icon, href, auth
         cursor-pointer 
         lg:hidden
       ">
-          <Icon size={28} color="white" />
-          {alert ? <BsDot className="text-sky-500 absolute -top-4 left-0" size={70} /> : null}
-        </div>
-        <div className={`
+            <Icon size={28} color="white" />
+            {alert ? <BsDot className="text-sky-500 absolute -top-4 left-0" size={70} /> : null}
+          </div>
+          <div className={`
         relative
         hidden 
         lg:flex 
@@ -71,9 +71,12 @@ const SidebarItem: React.FC<SidebarItemProps> = ({ label, icon: Icon, href, auth
         cursor-pointer
         items-center
       `}>
-          <Icon size={24} color='white' />
-          {alert ? <BsDot className="text-sky-500 absolute -top-4 left-0" size={70} /> : null}
-        </div>
+            <Icon size={24} color='white' />
+            {alert ? <BsDot className="text-sky-500 absolute -top-4 left-0" size={70} /> : null}
+          </div>
+
+        </>
+
       </Tooltip>
     </div >
   );
