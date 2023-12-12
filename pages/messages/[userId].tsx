@@ -32,7 +32,7 @@ const Notifications = () => {
   return (
     <>
       <Header showBackArrow label="Messages" />
-      <MessageFeed userId={userId} />
+      <MessageFeed userId={userId as string} />
     </>
   );
 }
