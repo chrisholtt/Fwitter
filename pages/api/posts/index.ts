@@ -79,7 +79,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         });
       }
 
-      const blurredImages = await Promise.all(posts.map((post: any) => currentUser.followingIds.includes(post.userId) ? post.image : blurImage(post.image)));
+      const blurredImages = await Promise.all(posts.map((post: { userId: string, image: string | null }) => currentUser.followingIds.includes(post.userId) ? post.image : blurImage(post.image)));
 
       posts.forEach((post, index) => {
         post.image = blurredImages[index] as string | null;
