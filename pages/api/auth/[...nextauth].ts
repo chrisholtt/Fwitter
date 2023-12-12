@@ -11,24 +11,10 @@ interface CustomCallbacksOptions extends CallbacksOptions<Profile, Account> {
   error?(error: any, req: any, res: any, next: any): Promise<void>;
 }
 
-const customCallbacks: CustomCallbacksOptions = {
-  async error(error: any, req: any, res: any, next: any) {
-    // Handle errors
-    if (error.message === 'Invalid password' || error.message === 'No user found') {
-      // Handle invalid credentials error
-      res.redirect('https://www.youtube.com/watch?v=PGPGcKBpAk8&t=4830s');
-      return Promise.resolve();
-    }
-    // Handle other errors
-    return Promise.resolve()
-  },
-
-}
 
 
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
-  callbacks: customCallbacks,
   providers: [
     Google({
       clientId: process.env.GITHUB_CLIENT_ID as string,
