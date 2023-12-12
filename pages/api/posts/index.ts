@@ -7,7 +7,6 @@ import sharp from 'sharp'
 
 const blurImage = async (base64: string | null, blurSigma = 15) => {
   try {
-    console.log(base64)
     const dataUrlParts = base64.match(/data:(.*?);base64,(.*)/);
     const mimeType = dataUrlParts[1];
     const imageData = Buffer.from(dataUrlParts[2], 'base64');
@@ -32,11 +31,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
 
+    const { currentUser } = await serverAuth(req, res);
     if (req.method === 'POST') {
-      const { currentUser } = await serverAuth(req, res);
       const { body, images } = req.body;
-
-      console.log("images: " + images)
 
 
       const post = await prisma.post.create({
@@ -79,7 +76,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         });
       }
 
-      const blurredImages = await Promise.all(posts.map((post) => blurImage(post.image)));
+      const blurredImages = await Promise.all(posts.map((post) => currentUser.followingIds.includes(post.userId) ? post.image : blurImage(post.image)));
 
       posts.forEach((post, index) => {
         post.image = blurredImages[index];

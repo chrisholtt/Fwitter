@@ -1,6 +1,5 @@
 import Header from "@/components/Header";
 import MessagesFeed from "@/components/messages/MessagesFeed";
-import useCurrentUser from "@/hooks/useCurrentUser";
 import { NextPageContext } from "next";
 import { getSession } from "next-auth/react";
 

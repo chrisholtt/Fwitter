@@ -7,6 +7,7 @@ import useCurrentUser from "@/hooks/useCurrentUser";
 import { useEffect, useState } from "react";
 import { BiBody } from "react-icons/bi";
 import Avatar from "../Avatar"
+import Button from "../Button";
 
 
 interface NotificationsFeedProps {
@@ -15,17 +16,19 @@ interface NotificationsFeedProps {
 
 const NotificationsFeed: React.FC<NotificationsFeedProps> = ({ userId }) => {
   const { data: currentUser, mutate: mutateCurrentUser } = useCurrentUser();
-  const { data: fetchedNotifications = [] } = useNotifications(currentUser?.id);
-  const { data: fetchedMessages = [] } = useMessages(currentUser?.id);
+  // const { data: fetchedNotifications = [] } = useNotifications(currentUser?.id);
+  const { data: fetchedMessages = [], sendMessage } = useMessages(currentUser?.id);
   const { data: fetchedUser } = useUser(userId);
-
-
 
   const [body, setBody] = useState("")
 
   useEffect(() => {
     mutateCurrentUser();
   }, [mutateCurrentUser]);
+
+  const handleSend = () => {
+    return null;
+  }
 
   if (fetchedMessages.length === 0) {
     return (
@@ -34,7 +37,7 @@ const NotificationsFeed: React.FC<NotificationsFeedProps> = ({ userId }) => {
           Start conversation
         </div>
 
-        <Avatar userId={fetchedUser.id} isLarge hasBorder />
+        <Avatar userId={fetchedUser?.id} isLarge hasBorder />
 
 
         <textarea
@@ -56,6 +59,7 @@ const NotificationsFeed: React.FC<NotificationsFeedProps> = ({ userId }) => {
               "
           placeholder="Write a message">
         </textarea>
+        <Button label="Send" onClick={handleSend} />
       </>
     )
   }

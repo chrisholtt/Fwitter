@@ -11,6 +11,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     const { email, username, name, password } = req.body;
 
+    if (!email || !name || !password) {
+      return res.status(400).json("Missing information");
+    }
+
     const hashedPassword = await bcrypt.hash(password, 12);
 
     const user = await prisma.user.create({
@@ -24,7 +28,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     return res.status(200).json(user);
   } catch (error) {
-    console.log(error);
+    console.log(error, "registration error");
     return res.status(400).end();
   }
 }

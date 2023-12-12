@@ -17,7 +17,7 @@ interface SidebarItemProps {
   isGradient?: boolean;
 }
 
-const SidebarItem: React.FC<SidebarItemProps> = ({ label, icon: Icon, href, auth, onClick, alert, isGradient, color }) => {
+const SidebarItem: React.FC<SidebarItemProps> = ({ label, icon: Icon, href, auth, onClick, alert, isGradient }) => {
   const router = useRouter();
   const loginModal = useLoginModal();
 

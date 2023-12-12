@@ -53,7 +53,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         console.log(error);
       }
       // NOTIFICATION PART END
-      
+
     }
 
     if (req.method === 'DELETE') {

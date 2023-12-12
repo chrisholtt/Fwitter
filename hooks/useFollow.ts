@@ -5,10 +5,14 @@ import { toast } from "react-hot-toast";
 import useCurrentUser from "./useCurrentUser";
 import useLoginModal from "./useLoginModal";
 import useUser from "./useUser";
+import usePosts from "./usePosts";
 
 const useFollow = (userId: string) => {
   const { data: currentUser, mutate: mutateCurrentUser } = useCurrentUser();
   const { mutate: mutateFetchedUser } = useUser(userId);
+  const { mutate: mutatePosts } = usePosts(userId);
+
+
 
   const loginModal = useLoginModal();
 
@@ -35,6 +39,8 @@ const useFollow = (userId: string) => {
       await request();
       mutateCurrentUser();
       mutateFetchedUser();
+      mutatePosts();
+
 
       toast.success('Success');
     } catch (error) {

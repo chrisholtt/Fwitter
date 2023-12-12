@@ -1,12 +1,16 @@
 import { signIn } from "next-auth/react";
 import { useCallback, useState } from "react";
 import { toast } from "react-hot-toast";
+import { BsGithub, BsGoogle } from 'react-icons/bs'
 
 import useLoginModal from "@/hooks/useLoginModal";
 import useRegisterModal from "@/hooks/useRegisterModal";
 
+import AuthSocialButton from "./components/AuthSocialButton"
 import Input from "../Input";
 import Modal from "../Modal";
+import { callbackify } from "util";
+import { redirect } from "next/dist/server/api-utils";
 
 const LoginModal = () => {
   const loginModal = useLoginModal();
@@ -20,12 +24,17 @@ const LoginModal = () => {
     try {
       setIsLoading(true);
 
-      await signIn('credentials', {
+      const res = await signIn('credentials', {
         email,
         password,
-      });
+        redirect: false
+      },)
 
-      toast.success('Logged in');
+      if (res?.error) {
+        toast.error("invalid credentials")
+      }
+      if (!res?.error && res?.ok)
+        toast.success('Logged in');
 
       loginModal.onClose();
     } catch (error) {
@@ -39,6 +48,11 @@ const LoginModal = () => {
     loginModal.onClose();
     registerModal.onOpen();
   }, [loginModal, registerModal])
+
+  const socialAction = (action: string) => {
+    setIsLoading(true);
+    signIn()
+  }
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
@@ -58,19 +72,27 @@ const LoginModal = () => {
     </div>
   )
 
+
+
   const footerContent = (
-    <div className="text-neutral-400 text-center mt-4">
-      <p>First time using Twitter?
-        <span
-          onClick={onToggle}
-          className="
+    <>
+      <div className="mt-6 flex gap-2">
+        <AuthSocialButton icon={BsGithub} onClick={() => socialAction("Github")} />
+        <AuthSocialButton icon={BsGoogle} onClick={() => socialAction("Google")} />
+      </div>
+      <div className="text-neutral-400 text-center mt-4">
+        <p>First time using Twitter?
+          <span
+            onClick={onToggle}
+            className="
             text-white 
             cursor-pointer 
             hover:underline
           "
-        > Create an account</span>
-      </p>
-    </div>
+          > Create an account</span>
+        </p>
+      </div>
+    </>
   )
 
   return (

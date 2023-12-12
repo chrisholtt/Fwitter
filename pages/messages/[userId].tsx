@@ -28,6 +28,7 @@ export async function getServerSideProps(context: NextPageContext) {
 const Notifications = () => {
   const router = useRouter();
   const { userId } = router.query;
+
   return (
     <>
       <Header showBackArrow label="Messages" />
