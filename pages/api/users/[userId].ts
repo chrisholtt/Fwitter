@@ -1,7 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-
 import prisma from '@/libs/prismadb';
-import { includes } from "lodash";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'GET') {
