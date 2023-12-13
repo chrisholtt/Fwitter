@@ -7,7 +7,6 @@ import { useEffect } from "react";
 
 const NotificationsFeed = () => {
   const { data: currentUser, mutate: mutateCurrentUser } = useCurrentUser();
-  // const { data: fetchedNotifications = [] } = useNotifications(currentUser?.id);
   const { data: fetchedMessages = [] } = useMessages(currentUser?.id);
 
   useEffect(() => {

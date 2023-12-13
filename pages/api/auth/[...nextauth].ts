@@ -7,18 +7,13 @@ import Google from 'next-auth/providers/google'
 
 import prisma from "@/libs/prismadb"
 
-interface CustomCallbacksOptions extends CallbacksOptions<Profile, Account> {
-  error?(error: any, req: any, res: any, next: any): Promise<void>;
-}
-
-
 
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     Google({
-      clientId: process.env.GITHUB_CLIENT_ID as string,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET as string
+      clientId: process.env.GOOGLE_CLIENT_ID as string,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string
     }),
     CredentialsProvider({
       name: 'credentials',

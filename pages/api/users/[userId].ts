@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
 import prisma from '@/libs/prismadb';
+import { includes } from "lodash";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'GET') {
@@ -17,7 +18,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const existingUser = await prisma.user.findUnique({
       where: {
         id: userId
+      },
+      select: {
+        email: true
       }
+
     });
 
     const followersCount = await prisma.user.count({

@@ -1,10 +1,11 @@
-import { signIn } from "next-auth/react";
-import { useCallback, useState } from "react";
+import { signIn, useSession } from "next-auth/react";
+import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { BsGithub, BsGoogle } from 'react-icons/bs'
 
 import useLoginModal from "@/hooks/useLoginModal";
 import useRegisterModal from "@/hooks/useRegisterModal";
+import { useRouter } from 'next/navigation'
 
 import AuthSocialButton from "./components/AuthSocialButton"
 import Input from "../Input";
@@ -19,6 +20,8 @@ const LoginModal = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+
 
   const onSubmit = useCallback(async () => {
     try {
@@ -51,7 +54,17 @@ const LoginModal = () => {
 
   const socialAction = (action: string) => {
     setIsLoading(true);
-    signIn()
+    signIn(action, { redirect: false })
+      .then((callback) => {
+        if (callback?.error) {
+          toast.error("Login failed")
+        }
+        if (callback?.ok && !callback?.error) {
+          toast.success("Login success")
+        }
+      }).finally(() => {
+        setIsLoading(false)
+      })
   }
 
   const bodyContent = (
