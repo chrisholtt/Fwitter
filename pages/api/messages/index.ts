@@ -15,9 +15,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             throw new Error('Invalid ID');
         }
 
-        const messages = await prisma.messages.findMany({
+        const messages = await prisma.conversation.findMany({
             where: {
-                to: currentUser.id,
+                createdAt: currentUser.id,
             },
             orderBy: {
                 createdAt: 'desc',
