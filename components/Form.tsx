@@ -97,7 +97,7 @@ const Form: React.FC<FormProps> = ({ placeholder, isComment, postId }) => {
         </div>
       ) : (
         <div className="py-8">
-          <h1 className="text-white text-2xl text-center mb-4 font-bold">Welcome to FanFlux</h1>
+          <h1 className="text-white text-2xl text-center mb-4 font-bold">Welcome 0xFans</h1>
           <div className="flex flex-row items-center justify-center gap-4">
             <Button label="Login" onClick={loginModal.onOpen} />
             <Button label="Register" onClick={registerModal.onOpen} secondary />
