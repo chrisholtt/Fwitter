@@ -2,9 +2,7 @@ import bcrypt from "bcrypt"
 import NextAuth, { AuthOptions, CallbacksOptions, Profile, Account } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
-import GithubProvider from 'next-auth/providers/github'
 import Google from 'next-auth/providers/google'
-
 import prisma from "@/libs/prismadb"
 
 
@@ -56,7 +54,7 @@ export const authOptions: AuthOptions = {
   jwt: {
     secret: process.env.NEXTAUTH_JWT_SECRET,
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  // secret: process.env.NEXTAUTH_SECRET,
 
 };
 

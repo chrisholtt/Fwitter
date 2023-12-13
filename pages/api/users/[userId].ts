@@ -17,10 +17,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       where: {
         id: userId
       },
-      select: {
-        email: true
-      }
-
     });
 
     const followersCount = await prisma.user.count({
