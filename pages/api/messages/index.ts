@@ -3,6 +3,7 @@ import serverAuth from "@/libs/serverAuth";
 
 import prisma from '@/libs/prismadb';
 
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const { currentUser } = await serverAuth(req, res);
 
@@ -15,9 +16,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             throw new Error('Invalid ID');
         }
 
-        const messages = await prisma.conversation.findMany({
+        const users = await prisma.user.findMany({
             where: {
-                createdAt: currentUser.id,
+                NOT: {
+                    email: currentUser?.email,
+                }
             },
             orderBy: {
                 createdAt: 'desc',
@@ -33,7 +36,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             }
         });
 
-        return res.status(200).json(messages);
+        return res.status(200).json(users);
     } catch (error) {
         console.log(error);
         return res.status(400).end();
