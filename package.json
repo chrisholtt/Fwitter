@@ -35,7 +35,7 @@
     "react-icons": "^4.12.0",
     "react-spinners": "^0.13.8",
     "react-toastify": "^9.1.1",
-    "sharp": "^0.33.0",
+    "sharp": "0.32.6",
     "swr": "^2.0.4",
     "typescript": "4.9.5",
     "zustand": "^4.3.5"
