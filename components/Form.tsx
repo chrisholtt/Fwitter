@@ -48,7 +48,7 @@ const Form: React.FC<FormProps> = ({ placeholder, isComment, postId }) => {
     } finally {
       setIsLoading(false);
     }
-  }, [body, mutatePosts, isComment, postId, mutatePost]);
+  }, [body, mutatePosts, isComment, postId, mutatePost, images]);
 
   return (
     <div className="border-b-[1px] border-neutral-800 px-5 py-2">

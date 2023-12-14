@@ -62,7 +62,7 @@ const MessageFeed = () => {
             ">
               {users.map((user: User) => {
                 return (
-                  <UserBox userId={user.id} name={user.name as string} />
+                  <UserBox userId={user.id} name={user.name as string} key={user.id} />
                 )
               })}
             </div>
