@@ -1,8 +1,9 @@
 import bcrypt from "bcrypt"
-import NextAuth, { AuthOptions, CallbacksOptions, Profile, Account } from "next-auth"
+import NextAuth, { AuthOptions, Profile, } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import Google from 'next-auth/providers/google'
+// import TwitterProvider from 'next-auth/providers/twitter'
 import prisma from "@/libs/prismadb"
 
 
@@ -11,8 +12,14 @@ export const authOptions: AuthOptions = {
   providers: [
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+
     }),
+    // TwitterProvider({
+    //   version: "1.0",
+    //   clientId: process.env.TWITTER_CLIENT_ID as string,
+    //   clientSecret: process.env.TWITTER_CLIENT_SECRET as string
+    // }),
     CredentialsProvider({
       name: 'credentials',
       credentials: {
@@ -54,7 +61,7 @@ export const authOptions: AuthOptions = {
   jwt: {
     secret: process.env.NEXTAUTH_JWT_SECRET,
   },
-  // secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET,
 
 };
 

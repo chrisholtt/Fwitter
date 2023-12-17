@@ -2,13 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+/* :root {
   @apply h-full
 }
 
 body {
   @apply h-full
-}
+} */
 
 
 .my-input:focus {

@@ -16,27 +16,26 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             throw new Error('Invalid ID');
         }
 
-        const users = await prisma.user.findMany({
+        const conversations = await prisma.conversation.findMany({
+            orderBy: {
+                lastMessageAt: 'desc'
+            },
             where: {
-                NOT: {
-                    email: currentUser?.email,
+                userIds: {
+                    has: currentUser.id
                 }
             },
-            orderBy: {
-                createdAt: 'desc',
-            },
-        });
-
-        await prisma.user.update({
-            where: {
-                id: currentUser.id,
-            },
-            data: {
-                hasNotification: false,
+            include: {
+                users: true,
+                messages: {
+                    include: {
+                        sender: true,
+                        seen: true
+                    }
+                }
             }
-        });
-
-        return res.status(200).json(users);
+        })
+        return res.status(200).json(conversations);
     } catch (error) {
         console.log(error);
         return res.status(400).end();

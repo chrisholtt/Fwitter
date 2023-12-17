@@ -37,7 +37,7 @@ const Sidebar = () => {
     {
       icon: MdOutlineMail,
       label: 'Messages',
-      href: '/messages',
+      href: '/conversations',
       auth: true,
       alert: currentUser?.hasNotification
     },

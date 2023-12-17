@@ -1,10 +1,11 @@
 import Header from "@/components/Header";
-import MessagesFeed from "@/components/messages/MessagesFeed";
-import { NextPageContext } from "next";
+import ConversationList from "./components/ConversationsList";
+import useUserConversations from '@/hooks/useUserConversations';
 import { getSession } from "next-auth/react";
 
-// export async function getServerSideProps(context: NextPageContext) {
+// export async function getServerSideProps(context: any) {
 //   const session = await getSession(context);
+//   const { data: conversations } = useUserConversations();
 
 //   console.log(session)
 //   console.log(session)
@@ -20,23 +21,23 @@ import { getSession } from "next-auth/react";
 //     }
 //   }
 
-//   return {
-//     props: {
-//       session
-//     }
+// return {
+//   props: {
+//     session
 //   }
 // }
+// }
 
-// console.log(2)
 
 
-const Notifications = () => {
+const Conversations = () => {
+  const { data: conversations } = useUserConversations();
   return (
     <>
       <Header showBackArrow label="Messages" />
-      <MessagesFeed />
+      <ConversationList initialItems={conversations} />
     </>
   );
 }
 
-export default Notifications;
+export default Conversations;

@@ -6,7 +6,7 @@ import { formatDistanceToNowStrict } from 'date-fns';
 import useLoginModal from '@/hooks/useLoginModal';
 import useCurrentUser from '@/hooks/useCurrentUser';
 import useLike from '@/hooks/useLike';
-
+import Image from 'next/image'
 import Avatar from '../Avatar';
 interface PostItemProps {
   data: Record<string, any>;
@@ -93,9 +93,16 @@ const PostItem: React.FC<PostItemProps> = ({ data = {}, userId }) => {
 
           <div className="text-white mt-1">
             {data.body}
-            <img src={data.image} className='w-64 rounded-lg' />
+            <Image
+              src={data.image}
+              alt="post"
+              width={100}
+              height={300}
+              className='rounded-lg'
+              layout="responsive"
+            />
           </div>
-          <div className="flex flex-row items-center mt-3 gap-10">
+          <div className="flex flex-row items-center mt-3 gap-1">
             <div
               className="
                 flex 

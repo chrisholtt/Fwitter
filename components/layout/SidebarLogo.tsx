@@ -19,7 +19,7 @@ const SidebarLogo = () => {
         hover:bg-opacity-10 
         cursor-pointer
     ">
-      <Image width={100} height={100} alt="logo" className="w-full" src="images/logo.svg" />
+      <Image width={100} height={100} alt="logo" priority className="w-full" src="images/logo.svg" />
     </div>
   );
 };

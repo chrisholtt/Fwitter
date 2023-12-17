@@ -1,7 +1,7 @@
 import { signIn, useSession } from "next-auth/react";
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
-import { BsGithub, BsGoogle } from 'react-icons/bs'
+import { BsTwitterX, BsGoogle, } from 'react-icons/bs'
 
 import useLoginModal from "@/hooks/useLoginModal";
 import useRegisterModal from "@/hooks/useRegisterModal";
@@ -44,6 +44,7 @@ const LoginModal = () => {
       toast.error('Something went wrong');
     } finally {
       setIsLoading(false);
+      console.log("finally")
     }
   }, [email, password, loginModal]);
 
@@ -90,7 +91,7 @@ const LoginModal = () => {
   const footerContent = (
     <>
       <div className="mt-6 flex gap-2">
-        <AuthSocialButton icon={BsGithub} onClick={() => socialAction("Github")} />
+        <AuthSocialButton icon={BsTwitterX} onClick={() => socialAction("Twitter")} />
         <AuthSocialButton icon={BsGoogle} onClick={() => socialAction("Google")} />
       </div>
       <div className="text-neutral-400 text-center mt-4">

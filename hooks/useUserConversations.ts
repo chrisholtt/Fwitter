@@ -1,13 +1,12 @@
 import useSWR from 'swr';
-
 import fetcher from '@/libs/fetcher';
 import useCurrentUser from "./useCurrentUser";
 import useLoginModal from "./useLoginModal";
 
 
-const useMessages = (userId?: string) => {
+const useConversations = () => {
   const { data: currentUser, mutate: mutateCurrentUser } = useCurrentUser();
-  const url = "/api/messages";
+  const url = "/api/userConversations";
   const { data, error, isLoading, mutate } = useSWR(url, fetcher);
 
   const loginModal = useLoginModal();
@@ -20,7 +19,6 @@ const useMessages = (userId?: string) => {
   }
 
 
-
   return {
     data,
     error,
@@ -30,4 +28,4 @@ const useMessages = (userId?: string) => {
   }
 };
 
-export default useMessages;
+export default useConversations;

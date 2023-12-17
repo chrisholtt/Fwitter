@@ -5,15 +5,15 @@ import { FaCrown } from "react-icons/fa";
 import { LuMessagesSquare } from "react-icons/lu";
 
 import { useRouter } from 'next/router';
-
+import { useCallback } from "react";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import useUser from "@/hooks/useUser";
 import useFollow from "@/hooks/useFollow";
-import useMessage from "@/hooks/useMessages";
 import useEditModal from "@/hooks/useEditModal";
 import useWalletModal from "@/hooks/useWalletModal";
 import SidebarItem from "@/components/layout/SidebarItem"
 import Button from "../Button";
+import axios from "axios";
 
 interface UserBioProps {
   userId: string;
@@ -30,6 +30,15 @@ const UserBio: React.FC<UserBioProps> = ({ userId }) => {
 
   const { isFollowing, toggleFollow } = useFollow(userId);
 
+  const handleMessage = useCallback(() => {
+    // setisLoaing(true);
+    axios.post("/api/conversations", { userId: userId })
+      .then((data) => {
+        router.push(`/conversations/${data.data.id}`)
+      }).finally(() => {
+        // setisLoaing(false)
+      })
+  }, [userId, router])
 
   const createdAt = useMemo(() => {
     if (!fetchedUser?.createdAt) {
@@ -58,6 +67,7 @@ const UserBio: React.FC<UserBioProps> = ({ userId }) => {
                 icon={LuMessagesSquare}
                 label={"Message"}
                 isGradient={false}
+                onClick={handleMessage}
               />
               <Button onClick={toggleFollow} label={isFollowing ? 'Subsribed' : 'Subscribe'} secondary={!isFollowing} />
             </>
