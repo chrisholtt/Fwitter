@@ -47,9 +47,10 @@ export async function getServerSideProps(context: NextPageContext) {
   const { conversationId } = context.query;
 
   let conversation = await getConversationById(conversationId as string);
-  const messages = await getMessages(conversationId as string);
+  let messages = await getMessages(conversationId as string);
 
   conversation = JSON.parse(JSON.stringify(conversation))
+  messages = JSON.parse(JSON.stringify(messages))
 
   return {
     props: {

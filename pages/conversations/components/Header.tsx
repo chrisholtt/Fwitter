@@ -27,7 +27,7 @@ const ConversationHeader: React.FC<HeaderProps> = ({
 
     return (
         <div className="flex gap-3 items-center justify-between">
-            <div>
+            <div className="flex">
                 <Avatar userId={otherUser.id} />
                 <div className="flex flex-col text-white">
                     <div>
