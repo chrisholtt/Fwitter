@@ -2,7 +2,9 @@
 
 const ConversationFeed = () => {
     return (
-        <div></div>
+        <div>
+            <div className="text-white">convo feed</div>
+        </div>
     )
 }
 

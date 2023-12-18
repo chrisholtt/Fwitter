@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { BiCalendar } from "react-icons/bi";
 import { format } from "date-fns";
 import { FaCrown } from "react-icons/fa";
@@ -23,6 +23,7 @@ const UserBio: React.FC<UserBioProps> = ({ userId }) => {
   const { data: currentUser } = useCurrentUser();
   const { data: fetchedUser } = useUser(userId);
   const router = useRouter();
+
 
 
   const editModal = useEditModal();
