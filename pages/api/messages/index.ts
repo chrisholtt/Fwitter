@@ -16,17 +16,15 @@ export default async function handler(
             conversationId,
         } = req.body;
 
+
+
         if (!currentUser || !currentUser?.email) {
             return res.status(401).json("Unatuthorized");
         }
 
-        if (!message || !conversationId) {
-            return res.status(400).json("Invalid credentials");
-        }
-
         const newMessage = await prisma.message.create({
             data: {
-                body: message,
+                body: message ?? 'hey', // TODO getting error when sending image with no message
                 image: image,
                 conversation: {
                     connect: {
