@@ -35,7 +35,7 @@ const Conversation: React.FC<ConversationProps> = ({ session, conversation, mess
     <>
       <Header showBackArrow label="Messages" />
       <ConversationHeader conversation={conversation} />
-      <Body initialItems={messages} />
+      <Body initialMessages={messages} />
       <Form />
       {/* <ConversationFeed messages={messages} /> */}
     </>
