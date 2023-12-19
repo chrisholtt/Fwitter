@@ -7,7 +7,7 @@ import { format } from 'date-fns';
 import useOtherUser from '@/hooks/useOtherUser';
 import useActiveList from '@/hooks/useActiveList';
 
-import Avatar from './Avatar';
+import Avatar from '@/components/Avatar';
 import AvatarGroup from './AvatarGroup';
 import ConfirmModal from './ConfirmModal';
 

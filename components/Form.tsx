@@ -55,7 +55,7 @@ const Form: React.FC<FormProps> = ({ placeholder, isComment, postId }) => {
       {currentUser ? (
         <div className="flex flex-row gap-4">
           <div>
-            <Avatar userId={currentUser?.id} />
+            <Avatar user={currentUser} />
           </div>
           <div className="w-full">
             <textarea

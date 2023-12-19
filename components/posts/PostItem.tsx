@@ -7,7 +7,8 @@ import useLoginModal from '@/hooks/useLoginModal';
 import useCurrentUser from '@/hooks/useCurrentUser';
 import useLike from '@/hooks/useLike';
 import Image from 'next/image'
-import Avatar from '../Avatar';
+import Avatar from '@/components/Avatar';
+
 interface PostItemProps {
   data: Record<string, any>;
   userId?: string;
@@ -62,7 +63,7 @@ const PostItem: React.FC<PostItemProps> = ({ data = {}, userId }) => {
         transition
       ">
       <div className="flex flex-row items-start gap-3">
-        <Avatar userId={data.user.id} />
+        <Avatar user={data.user} />
         <div>
           <div className="flex flex-row items-center gap-2">
             <p

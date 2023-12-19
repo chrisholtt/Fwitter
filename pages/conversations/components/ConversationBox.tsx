@@ -75,7 +75,7 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({
         cursor-pointer
         p-3
         ">
-            <Avatar userId={otherUser.id} />
+            <Avatar user={otherUser} />
             <div className="min-w-0 flex-1">
                 <div className='focus:outline-none'>
                     <div className="
