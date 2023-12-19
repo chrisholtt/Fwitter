@@ -1,8 +1,10 @@
 import Avatar from "@/components/Avatar";
 import useOtherUser from "@/hooks/useOtherUser";
 import { Conversation, User } from "@prisma/client"
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import { HiEllipsisHorizontal } from 'react-icons/hi2'
+import ProfileDrawer from "./ProfileDrawer"
+
 
 interface HeaderProps {
     conversation: Conversation & {
@@ -13,9 +15,8 @@ interface HeaderProps {
 const ConversationHeader: React.FC<HeaderProps> = ({
     conversation
 }) => {
-
-
     const otherUser = useOtherUser(conversation);
+    const [drawerOpen, setDrawerOpen] = useState(false);
 
     const statusText = useMemo(() => {
         if (conversation.isGroup) {
@@ -26,30 +27,38 @@ const ConversationHeader: React.FC<HeaderProps> = ({
 
 
     return (
-        <div className="flex gap-3 items-center justify-between">
-            <div className="flex">
-                <Avatar userId={otherUser.id} />
-                <div className="flex flex-col text-white">
-                    <div>
-                        {conversation.name || otherUser.name}
-                    </div>
-                    <div className="
+        <>
+            <ProfileDrawer
+                data={conversation}
+                isOpen={drawerOpen}
+                onClose={() => setDrawerOpen(false)}
+            />
+            <div className="flex gap-3 items-center justify-between">
+                <div className="flex">
+                    <Avatar userId={otherUser.id} />
+                    <div className="flex flex-col text-white">
+                        <div>
+                            {conversation.name || otherUser.name}
+                        </div>
+                        <div className="
                     text-sm
                     font-light
                 ">
-                        {statusText}
+                            {statusText}
+                        </div>
                     </div>
                 </div>
-            </div>
-            <HiEllipsisHorizontal
-                size={32}
-                onClick={() => { }}
-                className="
+                <HiEllipsisHorizontal
+                    size={32}
+                    onClick={() => setDrawerOpen(true)}
+                    className="
                     text-white
                     transition
                 "
-            />
-        </div>
+                />
+            </div>
+        </>
+
     )
 }
 

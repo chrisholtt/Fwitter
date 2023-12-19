@@ -1,24 +1,21 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import serverAuth from "@/libs/serverAuth";
-import useCurrentUser from "@/hooks/useCurrentUser";
 import prisma from '@/libs/prismadb';
 
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
         const { currentUser } = await serverAuth(req, res);
+        const { conversationId } = req.query;
 
-        const {
-            conversationId
-        } = req.body;
 
-        if (!currentUser?.id || currentUser?.email) {
+        if (!currentUser.id || !currentUser.email) {
             return res.status(401).json("Unauthorized")
         }
 
         const conversation = await prisma.conversation.findUnique({
             where: {
-                id: conversationId
+                id: conversationId as string
             },
             include: {
                 messages: {
@@ -39,7 +36,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         if (!lastMessage) {
             return res.status(401).json(conversation);
-
         }
 
         const updatedMessage = await prisma.message.update({

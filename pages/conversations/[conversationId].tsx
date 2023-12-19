@@ -1,6 +1,5 @@
 import Header from "@/components/Header";
 import ConversationHeader from "./components/Header";
-import ConversationFeed from "./components/ConversationFeed";
 import { getSession } from "next-auth/react";
 import { NextPageContext } from "next";
 import { useRouter } from "next/router";
@@ -37,7 +36,6 @@ const Conversation: React.FC<ConversationProps> = ({ session, conversation, mess
       <ConversationHeader conversation={conversation} />
       <Body initialMessages={messages} />
       <Form />
-      {/* <ConversationFeed messages={messages} /> */}
     </>
   );
 };
