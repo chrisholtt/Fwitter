@@ -20,13 +20,22 @@ const MessageInput: React.FC<MessageInputProps> = ({
     required,
     register,
 }) => {
+
+    if (!id) {
+        return (
+            <div>
+                Loading
+            </div>
+        )
+    }
+
     return (
         <div className="relative w-full">
             <input
                 id={id}
                 type={type}
                 autoComplete={id}
-                // {...register(id, { required })}
+                {...register(id, { required })}
                 placeholder={placeholder}
                 className="
           text-white

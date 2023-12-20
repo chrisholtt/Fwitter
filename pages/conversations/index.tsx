@@ -35,6 +35,10 @@ import { ClipLoader } from "react-spinners";
 const Conversations = () => {
   const { data: conversations, isLoading } = useUserConversations();
 
+  console.log(conversations)
+  console.log(conversations)
+  console.log(conversations)
+
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-full">
