@@ -20,7 +20,9 @@ const Avatar: React.FC<AvatarProps> = ({
     const router = useRouter();
 
     const handleClick = () => {
-        router.push("/users/" + user?.id)
+        if (clickable) {
+            router.push("/users/" + user?.id)
+        }
     }
 
     if (!user) {

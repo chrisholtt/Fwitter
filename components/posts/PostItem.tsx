@@ -63,7 +63,7 @@ const PostItem: React.FC<PostItemProps> = ({ data = {}, userId }) => {
         transition
       ">
       <div className="flex flex-row items-start gap-3">
-        <Avatar user={data.user} />
+        <Avatar user={data.user} clickable />
         <div>
           <div className="flex flex-row items-center gap-2">
             <p

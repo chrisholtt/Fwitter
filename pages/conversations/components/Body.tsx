@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import useConversation from "@/hooks/useConversation"
 import MessageBox from "./MessageBox"
 import axios from 'axios';
+import { ClipLoader } from "react-spinners";
 
 interface BodyProps {
     initialMessages: FullMessageType[];
@@ -23,9 +24,7 @@ const Body: React.FC<BodyProps> = ({
 
     if (!messages) {
         return (
-            <div>
-                Loading
-            </div>
+            <ClipLoader />
         )
     }
 

@@ -27,7 +27,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
     })
 
-    return res.status(200).json({ ...existingUser, followersCount });
+    const postCount = await prisma.post.count({
+      where: {
+        userId: userId
+      }
+    })
+
+    return res.status(200).json({ ...existingUser, followersCount, postCount });
   } catch (error) {
     console.log(error);
     return res.status(400).end();

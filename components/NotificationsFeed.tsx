@@ -1,5 +1,5 @@
 import { BsTwitter } from "react-icons/bs";
-
+import { ClipLoader } from "react-spinners";
 import useNotifications from "@/hooks/useNotifications";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import { useEffect } from "react";
@@ -8,9 +8,9 @@ const NotificationsFeed = () => {
   const { data: currentUser, mutate: mutateCurrentUser } = useCurrentUser();
   const { data: fetchedNotifications = [] } = useNotifications(currentUser?.id);
 
-  useEffect(() => {
-    mutateCurrentUser();
-  }, [mutateCurrentUser]);
+  // useEffect(() => {
+  //   mutateCurrentUser();
+  // }, [mutateCurrentUser]);
 
   if (fetchedNotifications.length === 0) {
     return (

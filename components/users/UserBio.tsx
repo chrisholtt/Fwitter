@@ -25,7 +25,6 @@ const UserBio: React.FC<UserBioProps> = ({ userId }) => {
   const router = useRouter();
 
 
-
   const editModal = useEditModal();
   const walletModal = useWalletModal();
 
@@ -103,6 +102,10 @@ const UserBio: React.FC<UserBioProps> = ({ userId }) => {
           </div>
         </div>
         <div className="flex flex-row items-center mt-4 gap-6">
+          <div className="flex flex-row items-center gap-1">
+            <p className="text-white">{fetchedUser?.postCount}</p>
+            <p className="text-neutral-500">Posts</p>
+          </div>
           <div className="flex flex-row items-center gap-1">
             <p className="text-white">{fetchedUser?.followingIds?.length}</p>
             <p className="text-neutral-500">Following</p>
