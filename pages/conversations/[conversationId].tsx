@@ -23,8 +23,29 @@ interface ConversationProps {
 }
 
 
+export async function getServerSideProps(context: NextPageContext) {
+  const session = await getSession(context);
+  const { conversationId } = context.query;
+
+  let conversation = await getConversationById(conversationId as string);
+  let messages = await getMessages(conversationId as string);
+
+  conversation = JSON.parse(JSON.stringify(conversation))
+  messages = JSON.parse(JSON.stringify(messages))
+
+  return {
+    props: {
+      session,
+      conversation,
+      messages,
+    },
+  };
+}
+
 const Conversation: React.FC<ConversationProps> = ({ session, conversation, messages }) => {
   const router = useRouter();
+  const { conversationId } = router.query;
+
 
   if (!conversation) {
     return (
@@ -44,23 +65,5 @@ const Conversation: React.FC<ConversationProps> = ({ session, conversation, mess
   );
 };
 
-export async function getServerSideProps(context: NextPageContext) {
-  const session = await getSession(context);
-  const { conversationId } = context.query;
-
-  let conversation = await getConversationById(conversationId as string);
-  let messages = await getMessages(conversationId as string);
-
-  conversation = JSON.parse(JSON.stringify(conversation))
-  messages = JSON.parse(JSON.stringify(messages))
-
-  return {
-    props: {
-      session,
-      conversation,
-      messages,
-    },
-  };
-}
 
 export default Conversation;
