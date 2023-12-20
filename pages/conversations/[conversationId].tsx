@@ -7,15 +7,19 @@ import { ClipLoader } from "react-spinners";
 import getConversationById from "@/actions/getConversationById";
 import getMessages from "@/actions/getMessages";
 import { Session } from "next-auth";
-import { Conversation, Message } from "@prisma/client";
+import { Conversation, Message, User } from "@prisma/client";
 import Body from './components/Body';
 import Form from './components/Form';
+import { FullMessageType } from "@/types";
+
 
 
 interface ConversationProps {
   session: Session;
-  conversation: Conversation;
-  messages: Message[]
+  conversation: Conversation & {
+    users: User[];
+  }
+  messages: FullMessageType[]
 }
 
 

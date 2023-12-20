@@ -16,14 +16,9 @@ const Body: React.FC<BodyProps> = ({
 
     const { conversationId } = useConversation();
 
-    // TODO Configure route for this, not sure on routing 
     useEffect(() => {
         axios.post(`/api/conversations/seen/${conversationId}`)
     }, [conversationId]);
-
-    // useEffect(() => {
-    //     axios.post("/api/conversations/seen", { conversationId: conversationId })
-    // }, [conversationId]);
 
     if (!messages) {
         return (

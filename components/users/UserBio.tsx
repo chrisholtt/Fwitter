@@ -32,7 +32,7 @@ const UserBio: React.FC<UserBioProps> = ({ userId }) => {
   const { isFollowing, toggleFollow } = useFollow(userId);
 
   const handleMessage = useCallback(() => {
-    // setisLoaing(true);
+    // setIsLoading(true);
     axios.post("/api/conversations", { userId: userId })
       .then((data) => {
         router.push(`/conversations/${data.data.id}`)

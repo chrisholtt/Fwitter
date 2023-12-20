@@ -95,7 +95,7 @@ const LoginModal = () => {
         <AuthSocialButton icon={BsGoogle} onClick={() => socialAction("Google")} />
       </div>
       <div className="text-neutral-400 text-center mt-4">
-        <p>First time using 0xFans?
+        <p>First time using 0xTRA?
           <span
             onClick={onToggle}
             className="

@@ -52,7 +52,7 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                 isOpen={confirmOpen}
                 onClose={() => setConfirmOpen(false)}
             />
-            <Transition.Root show={isOpen} as={Fragment}>
+            <Transition.Root show={isOpen || false} as={Fragment}>
                 <Dialog as="div" className="relative z-50" onClose={onClose}>
                     <Transition.Child
                         as={Fragment}
@@ -79,7 +79,7 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                                     leaveTo="translate-x-full"
                                 >
                                     <Dialog.Panel className="pointer-events-auto w-screen max-w-md">
-                                        <div className="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
+                                        <div className="flex h-full flex-col overflow-y-scroll bg-neutral-800 py-6 shadow-xl">
                                             <div className="px-4 sm:px-6">
                                                 <div className="flex items-start justify-end">
                                                     <div className="ml-3 flex h-7 items-center">
