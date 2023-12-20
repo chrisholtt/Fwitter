@@ -20,7 +20,7 @@ const ConversationHeader: React.FC<HeaderProps> = ({
 
     const statusText = useMemo(() => {
         if (conversation.isGroup) {
-            return `${conversation?.users.length} members`;
+            return `${conversation?.users?.length} members`;
         }
         return 'Active'
     }, [conversation])
