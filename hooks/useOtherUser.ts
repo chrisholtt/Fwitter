@@ -9,10 +9,31 @@ const useOtherUser = (conversation: FullConversationType | { users: User[] }) =>
   const otherUser = useMemo(() => {
     const currentUserEmail = session.data?.user?.email;
 
-    const otherUser = conversation.users.filter((user) => user.email !== currentUserEmail);
+    // Use a default user if conversation or users is not defined
+    const defaultUser: User = {
+      id: "string",
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      followingIds: [""],
+      name: null,
+      username: null,
+      bio: null,
+      email: null,
+      emailVerified: null,
+      image: null,
+      coverImage: null,
+      profileImage: null,
+      hashedPassword: null,
+      hasNotification: null,
+      conversationIds: [],
+      seenMessageIds: []
+    };
 
-    return otherUser[0];
-  }, [session.data?.user?.email, conversation.users]);
+    const users = conversation?.users || [defaultUser];
+    const otherUser = users.find((user) => user.email !== currentUserEmail);
+
+    return otherUser || defaultUser;
+  }, [session.data?.user?.email, conversation]);
 
   return otherUser;
 };

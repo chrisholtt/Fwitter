@@ -22,7 +22,7 @@ const MessageBox: React.FC<MessageBoxProps> = ({
 
 
     const isOwn = session.data?.user?.email === data?.sender?.email
-    const seenList = (data.seen || [])
+    const seenList = (data?.seen || [])
         .filter((user) => user.email !== data?.sender?.email)
         .map((user) => user.name)
         .join(', ');
@@ -33,32 +33,40 @@ const MessageBox: React.FC<MessageBoxProps> = ({
     const message = clsx(
         'text-sm w-fit overflow-hidden',
         isOwn ? 'bg-sky-500 text-white' : 'bg-gray-100',
-        data.image ? 'rounded-md p-0' : 'rounded-full py-2 px-3'
+        data?.image ? 'rounded-md p-0' : 'rounded-full py-2 px-3'
     );
+
+    if (!data) {
+        return (
+            <div>
+                laoding
+            </div>
+        )
+    }
 
     return (
         <div className={container}>
             <div className={avatar}>
-                <Avatar user={data.sender} />
+                <Avatar user={data?.sender} />
             </div>
             <div className={body}>
                 <div className="flex items-center gap-1">
                     <div className="text-sm text-gray-500">
-                        {data.sender.name}
+                        {data?.sender.name}
                     </div>
                     <div className="text-xs text-gray-400">
-                        {format(new Date(data.createdAt), 'p')}
+                        {format(new Date(data?.createdAt), 'p')}
                     </div>
                 </div>
                 <div className={message}>
-                    <ImageModal src={data.image} isOpen={imageModalOpen} onClose={() => setImageModalOpen(false)} />
-                    {data.image ? (
+                    <ImageModal src={data?.image} isOpen={imageModalOpen} onClose={() => setImageModalOpen(false)} />
+                    {data?.image ? (
                         <Image
                             alt="Image"
                             height="288"
                             width="288"
                             onClick={() => setImageModalOpen(true)}
-                            src={data.image}
+                            src={data?.image}
                             className="
                 object-cover 
                 cursor-pointer 
@@ -68,7 +76,7 @@ const MessageBox: React.FC<MessageBoxProps> = ({
               "
                         />
                     ) : (
-                        <div>{data.body}</div>
+                        <div>{data?.body}</div>
                     )}
                 </div>
                 {isLast && isOwn && seenList.length > 0 && (

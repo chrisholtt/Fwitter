@@ -15,15 +15,18 @@ interface HeaderProps {
 const ConversationHeader: React.FC<HeaderProps> = ({
     conversation
 }) => {
+
     const otherUser = useOtherUser(conversation);
     const [drawerOpen, setDrawerOpen] = useState(false);
 
     const statusText = useMemo(() => {
-        if (conversation.isGroup) {
+        if (conversation?.isGroup) {
             return `${conversation?.users?.length} members`;
         }
         return 'Active'
     }, [conversation])
+
+
 
 
     return (
@@ -38,7 +41,7 @@ const ConversationHeader: React.FC<HeaderProps> = ({
                     <Avatar user={otherUser} />
                     <div className="flex flex-col text-white">
                         <div>
-                            {conversation.name || otherUser.name}
+                            {conversation?.name || otherUser?.name}
                         </div>
                         <div className="
                     text-sm

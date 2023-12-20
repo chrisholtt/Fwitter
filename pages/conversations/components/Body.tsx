@@ -20,13 +20,15 @@ const Body: React.FC<BodyProps> = ({
         axios.post(`/api/conversations/seen/${conversationId}`)
     }, [conversationId]);
 
+
     if (!messages) {
         return (
             <div>
-                loading
+                Loading
             </div>
         )
     }
+
 
     return (
         <div className='flex-1 overflow-y-auto'>

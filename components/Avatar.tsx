@@ -23,6 +23,14 @@ const Avatar: React.FC<AvatarProps> = ({
         router.push("/users/" + user?.id)
     }
 
+    if (!user) {
+        return (
+            <div>
+                Loading
+            </div>
+        )
+    }
+
     return (
         <div className="relative">
             <div onClick={handleClick} className={`

@@ -2,7 +2,6 @@ import Header from "@/components/Header";
 import ConversationHeader from "./components/Header";
 import { getSession } from "next-auth/react";
 import { NextPageContext } from "next";
-import { useRouter } from "next/router";
 import { ClipLoader } from "react-spinners";
 import getConversationById from "@/actions/getConversationById";
 import getMessages from "@/actions/getMessages";
@@ -43,9 +42,6 @@ export async function getServerSideProps(context: NextPageContext) {
 }
 
 const Conversation: React.FC<ConversationProps> = ({ session, conversation, messages }) => {
-  const router = useRouter();
-  const { conversationId } = router.query;
-
 
   if (!conversation) {
     return (

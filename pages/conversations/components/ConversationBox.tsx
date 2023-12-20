@@ -17,48 +17,48 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({
     selected
 }) => {
     const otherUser = useOtherUser(data);
-    const session = useSession();
-
+    // const session = useSession();
 
     const router = useRouter();
-    const [isLoading, setisLoaing] = useState(false);
-
+    // const [isLoading, setisLoaing] = useState(false);
 
     const handleClick = useCallback(() => {
-        setisLoaing(true);
+        // setisLoaing(true);
         router.push(`/conversations/${data.id}`);
     }, [data, router])
 
-    const lastMessage = useMemo(() => {
-        const messages = data.messages || [];
-        return messages[messages.length - 1];
-    }, [data.messages]);
+    // const lastMessage = useMemo(() => {
+    //     const messages = data.messages || [];
+    //     return messages[messages.length - 1];
+    // }, [data.messages]);
 
-    const userEmail = useMemo(() => {
-        return session.data?.user?.email;
-    }, [session?.data?.user?.email]);
+    // const userEmail = useMemo(() => {
+    //     return session.data?.user?.email;
+    // }, [session?.data?.user?.email]);
 
-    const hasSeen = useMemo(() => {
-        if (!lastMessage || !userEmail) {
-            return false;
-        }
+    // const hasSeen = useMemo(() => {
+    //     if (!lastMessage || !userEmail) {
+    //         return false;
+    //     }
 
-        const seenArray = lastMessage.seen || [];
+    //     const seenArray = lastMessage.seen || [];
 
-        return seenArray.filter((user) => user.email == userEmail).length != 0;
-    }, [userEmail, lastMessage]);
+    //     return seenArray.filter((user) => user.email == userEmail).length != 0;
+    // }, [userEmail, lastMessage]);
 
-    const lastMessageText = useMemo(() => {
-        if (lastMessage?.image) {
-            return 'Sent an image';
-        }
+    // const lastMessageText = useMemo(() => {
+    //     if (lastMessage?.image) {
+    //         return 'Sent an image';
+    //     }
 
-        if (lastMessage?.body) {
-            return lastMessage.body;
-        }
+    //     if (lastMessage?.body) {
+    //         return lastMessage.body;
+    //     }
 
-        return 'Started a conversation';
-    }, [lastMessage])
+    //     return 'Started a conversation';
+    // }, [lastMessage])
+
+
 
     return (
         <div onClick={handleClick}
@@ -75,7 +75,7 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({
         cursor-pointer
         p-3
         ">
-            <Avatar user={otherUser} />
+            {/* <Avatar user={otherUser} /> */}
             <div className="min-w-0 flex-1">
                 <div className='focus:outline-none'>
                     <div className="
@@ -90,25 +90,25 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({
                             text-white'
                         >
                             {/* display group chat name, else, other persons name */}
-                            {data.name || otherUser.name}
+                            {/* {data?.name || otherUser?.name} */}
                         </p>
-                        {lastMessage?.createdAt && (
+                        {/* {lastMessage?.createdAt && (
                             <p className='
                                 text-xs
                                 text-zinc-100
                                 font-light
                             '>
-                                {format(new Date(lastMessage.createdAt), 'p')}
+                                {format(new Date(lastMessage?.createdAt), 'p')}
                             </p>
-                        )}
+                        )} */}
                     </div>
-                    <p className={`
+                    {/* <p className={`
                         text-sm 
                         ${hasSeen ? 'text-zinc-200' : 'text-white font-medium'}
 
                         `}>
                         {lastMessageText}
-                    </p>
+                    </p> */}
 
                 </div>
             </div>

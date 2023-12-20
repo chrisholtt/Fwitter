@@ -28,23 +28,32 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
     const otherUser = useOtherUser(data);
 
     const joinedDate = useMemo(() => {
-        return format(new Date(otherUser.createdAt), 'PP');
-    }, [otherUser.createdAt]);
+        return format(new Date(otherUser?.createdAt), 'PP');
+    }, [otherUser?.createdAt]);
 
     const title = useMemo(() => {
-        return data.name || otherUser.name;
-    }, [data.name, otherUser.name]);
+        return data?.name || otherUser?.name;
+    }, [data?.name, otherUser?.name]);
 
     const { members } = useActiveList();
     const isActive = members.indexOf(otherUser?.email!) !== -1;
 
     const statusText = useMemo(() => {
-        if (data.isGroup) {
+        if (data?.isGroup) {
             return `${data?.users?.length} members`;
         }
 
         return isActive ? 'Active' : 'Offline'
     }, [data, isActive]);
+
+    if (!data) {
+        return (
+            <div>
+                Loading
+            </div>
+        )
+    }
+
 
     return (
         <>
@@ -97,7 +106,7 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                                             <div className="relative mt-6 flex-1 px-4 sm:px-6">
                                                 <div className="flex flex-col items-center">
                                                     <div className="mb-2">
-                                                        {data.isGroup ? <AvatarGroup users={data?.users} /> : <Avatar user={otherUser} />}
+                                                        {data?.isGroup ? <AvatarGroup users={data?.users} /> : <Avatar user={otherUser} />}
                                                     </div>
                                                     <div>
                                                         {title}
@@ -163,7 +172,7 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                                   sm:col-span-2
                                 "
                                                                     >
-                                                                        {otherUser.email}
+                                                                        {otherUser?.email}
                                                                     </dd>
                                                                 </div>
                                                             )}
