@@ -3,14 +3,19 @@ import { ClipLoader } from "react-spinners";
 import useNotifications from "@/hooks/useNotifications";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import { useEffect } from "react";
+import { Notification, User } from "@prisma/client";
 
-const NotificationsFeed = () => {
-  const { data: currentUser, mutate: mutateCurrentUser } = useCurrentUser();
-  const { data: fetchedNotifications = [] } = useNotifications(currentUser?.id);
+interface NotificationFeedProps {
+  fetchedNotifications: Notification[];
+  isLoading?: boolean;
 
-  // useEffect(() => {
-  //   mutateCurrentUser();
-  // }, [mutateCurrentUser]);
+}
+
+const NotificationsFeed: React.FC<NotificationFeedProps> = ({
+  fetchedNotifications,
+  isLoading
+}) => {
+
 
   if (fetchedNotifications.length === 0) {
     return (
