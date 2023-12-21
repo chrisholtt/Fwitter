@@ -94,14 +94,16 @@ const PostItem: React.FC<PostItemProps> = ({ data = {}, userId }) => {
 
           <div className="text-white mt-1">
             {data.body}
-            <Image
-              src={data.image}
-              alt="post"
-              width={100}
-              height={300}
-              className='rounded-lg'
-              layout="responsive"
-            />
+            {data.image &&
+              <Image
+                src={data.image ?? '/images/placeholder.png'}
+                alt="post"
+                width={100}
+                height={300}
+                className='rounded-lg'
+                layout="responsive"
+              />
+            }
           </div>
           <div className="flex flex-row items-center mt-3 gap-1">
             <div

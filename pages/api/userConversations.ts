@@ -33,7 +33,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                         seen: true
                     }
                 }
-            }
+            },
         })
         return res.status(200).json(conversations);
     } catch (error) {

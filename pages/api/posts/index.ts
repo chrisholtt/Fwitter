@@ -38,11 +38,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-
     const { currentUser } = await serverAuth(req, res);
+
     if (req.method === 'POST') {
       const { body, images } = req.body;
-
 
       const post = await prisma.post.create({
         data: {
