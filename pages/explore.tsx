@@ -26,7 +26,7 @@ import PostFeed from '@/components/posts/PostFeed'
 const Notifications = () => {
   return (
     <>
-      <Header showBackArrow label="Notifications" />
+      <Header showBackArrow label="Explore" />
       <PostFeed />
     </>
   );
